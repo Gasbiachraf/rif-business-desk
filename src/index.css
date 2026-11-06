@@ -1,0 +1,186 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-navy: #0b1630;
+  --color-navy-2: #14254a;
+  --color-navy-3: #1f3563;
+  --color-ivory: #f6f3ec;
+  --color-mist: #eaeef5;
+  --color-gold: #b38b4d;
+  --color-gold-light: #d8bc8a;
+  --color-gold-dark: #85642f;
+  --color-ink: #121a2b;
+  --color-slate: #565f73;
+  --color-line: #ddd6c8;
+  --color-line-cool: #d3dae6;
+
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+
+  --animate-rise: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-swap: swap 0.35s ease both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes swap {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    @apply bg-ivory font-sans text-ink antialiased;
+  }
+  [dir='rtl'] body {
+    font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', system-ui, sans-serif;
+  }
+  [dir='rtl'] .font-display {
+    font-family: 'Noto Naskh Arabic', 'Newsreader', serif;
+    font-style: normal;
+    letter-spacing: 0;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section label: "§ 01 — Services" */
+  .kicker {
+    @apply inline-flex items-center gap-2.5 text-sm font-medium text-gold-dark;
+  }
+  .kicker-num {
+    @apply font-display text-base text-gold italic;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-gold,
+  .btn-line,
+  .btn-wa {
+    @apply inline-flex min-h-12 items-center justify-center gap-2.5 rounded-[3px] px-6 text-[15px] font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply bg-navy text-white hover:bg-navy-3;
+  }
+  .btn-gold {
+    @apply bg-gold-light text-navy hover:bg-[#e6cfa6];
+  }
+  .btn-line {
+    @apply border border-current/25 hover:border-current/60 hover:bg-current/[0.04];
+  }
+  .btn-wa {
+    @apply bg-[#177e41] text-white hover:bg-[#136a37];
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-2 font-semibold underline decoration-gold/50 decoration-1 underline-offset-[6px] transition hover:decoration-gold;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-semibold text-ink;
+  }
+  .field {
+    @apply block min-h-12 w-full rounded-[3px] border border-line-cool bg-white px-4 py-3 text-base text-ink transition placeholder:text-slate/70 focus:border-navy focus:ring-4 focus:ring-navy/10 focus:outline-none aria-invalid:border-red-700 aria-invalid:ring-red-700/10;
+  }
+  .field-error {
+    @apply mt-1.5 text-sm font-medium text-red-700;
+  }
+
+  .panel {
+    @apply border border-line bg-white;
+  }
+
+  /* Gold registration corners, like the edges of an official document. */
+  .corners {
+    position: relative;
+  }
+  .corners::before,
+  .corners::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+  }
+  .corners::before {
+    top: -1px;
+    inset-inline-start: -1px;
+    border-top: 2px solid var(--color-gold);
+    border-inline-start: 2px solid var(--color-gold);
+  }
+  .corners::after {
+    bottom: -1px;
+    inset-inline-end: -1px;
+    border-bottom: 2px solid var(--color-gold);
+    border-inline-end: 2px solid var(--color-gold);
+  }
+}
+
+/* Faint drafting grid used behind headers. */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(11 22 48 / 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(11 22 48 / 0.055) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: -1px -1px;
+}
+.bg-grid-dark {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: -1px -1px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

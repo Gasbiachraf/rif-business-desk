@@ -5,7 +5,7 @@ Marque, adresse et contenus **fictifs** — ce n'est pas le site d'un cabinet r�
 
 ## Parcours principal
 
-Service → formulaire de consultation en 3 étapes (projet · disponibilités · coordonnées + consentement loi 09-08) → récapitulatif → message WhatsApp pré-rempli.
+Outil d'orientation (accueil et page services : situation + type de projet → service conseillé) ou page service → formulaire de consultation pré-rempli en 3 étapes (projet · disponibilités · coordonnées + consentement loi 09-08) → récapitulatif → message WhatsApp pré-rempli.
 
 ## Stack
 
